@@ -69,7 +69,7 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            rb.AddRelativeForce(Vector2.up * (speed / 10));
+            rb.AddRelativeForce(Vector2.up * (speed / 8));
         }
 
         if (Health == 0)

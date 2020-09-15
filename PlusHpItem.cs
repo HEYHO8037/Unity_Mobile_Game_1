@@ -8,13 +8,17 @@ public class PlusHpItem : MonoBehaviour
 
     [SerializeField]
     private GameObject Item; // 아이템 지정
+
     [SerializeField]
-    private GameObject player; // 플레이어 지정
+    private GameObject Player; // 플레이어 지정
+
+
 
     [SerializeField]
     private bool isSpawn = false;
 
-    private float spawnDelay = 15f; // 스폰 시간 조정
+
+    private float spawnDelay = 10f; // 스폰 시간 조정
     private float spawnTimer = 0f;
 
 
@@ -58,7 +62,7 @@ public class PlusHpItem : MonoBehaviour
 
         CreatePositions();
         SpawnItem();
-        if (player == false)
+        if (Player == false)
         {
             Destroy(this.gameObject);
         }
