@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
     private Rigidbody2D rb;
     private SpriteRenderer render;
+
+    [SerializeField]
+    protected Text HpText;
 
     private float middle; // 화면 분할 지정
     private Vector2 Touchpos; // 화면 좌표값
@@ -65,7 +69,7 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            rb.AddRelativeForce(Vector2.up * (speed / 2));
+            rb.AddRelativeForce(Vector2.up * (speed / 10));
         }
 
         if (Health == 0)
@@ -73,6 +77,8 @@ public class PlayerMove : MonoBehaviour
             Destroy(this.gameObject);
                 
         }
+        HpText.text = "HP : " + Health.ToString();
+
     }
     //충돌 시 함수
     private void OnTriggerEnter2D(Collider2D collision)
@@ -81,11 +87,27 @@ public class PlayerMove : MonoBehaviour
         {
             Destroy(collision.gameObject);
             Health -= 1;
+            HpText.text = "HP : " + Health.ToString();
             if (Health > 1)
             {
                 isUnBeatTime = true;
                 StartCoroutine("UnBeatTime"); // 코루틴 실행
             }
+        }
+        if(collision.gameObject.tag == "Item")
+        {
+            Destroy(collision.gameObject);
+            if (Health == 2)
+            {
+                Health = 2;
+                HpText.text = "HP : " + Health.ToString();
+            }
+            else
+            {
+                Health += 1;
+                HpText.text = "HP : " + Health.ToString();
+            }
+            
         }
     }
 
